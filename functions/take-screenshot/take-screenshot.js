@@ -1,13 +1,14 @@
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async (event, context) => {
+    const { 
+        name = 'Chewie'
+     } = JSON.parse(event.body);
 
-    const pageToScreenshot = JSON.parse(event.body).pageToScreenshot;
-
-    if (!pageToScreenshot) return {
-        statusCode: 400,
-        body: JSON.stringify({ message: 'Page URL not defined' })
-    }
+    // if (!pageToScreenshot) return {
+    //     statusCode: 400,
+    //     body: JSON.stringify({ message: 'Page URL not defined' })
+    // }
 
     const browser = await chromium.puppeteer.launch({
         args: chromium.args,
@@ -18,18 +19,45 @@ exports.handler = async (event, context) => {
     
     const page = await browser.newPage();
 
-    await page.goto(pageToScreenshot, { waitUntil: 'networkidle2' });
+    const HTML = `
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Document</title>
+        </head>
+        <body>
+            <h1>Hello, ${name}</h1>
+        </body>
+    </html>
+    `
+    await page.setContent(HTML)
+    const pdf = await page.pdf({path: 'report.pdf', format: 'A4'});
 
-    const screenshot = await page.screenshot({ encoding: 'binary' });
+
+
+
+    // await page.goto(pageToScreenshot, { waitUntil: 'networkidle2' });
+
+    // const screenshot = await page.screenshot({ encoding: 'binary' });
+
 
     await browser.close();
   
+    // return {
+    //     statusCode: 200,
+    //     body: JSON.stringify({ 
+    //         message: `Complete screenshot of ${pageToScreenshot}`, 
+    //         buffer: screenshot 
+    //     })
+    // }
+
     return {
         statusCode: 200,
-        body: JSON.stringify({ 
-            message: `Complete screenshot of ${pageToScreenshot}`, 
-            buffer: screenshot 
-        })
+        headers: {
+            'Content-Type': 'application/pdf',
+            'accept-ranges': 'bytes'
+        },
+        body: pdf
     }
-
 }
