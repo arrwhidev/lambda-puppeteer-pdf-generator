@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
     </html>
     `
     await page.setContent(HTML)
-    const pdf = await page.pdf({path: 'report.pdf', format: 'A4'});
+    const pdf = await page.pdf({format: 'A4'});
 
 
 
