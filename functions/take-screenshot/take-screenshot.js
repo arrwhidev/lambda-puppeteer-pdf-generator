@@ -58,6 +58,6 @@ exports.handler = async (event, context) => {
         headers: {
           "Content-type": "application/pdf"
         },
-        body: pdfStream.toString("base64")
+        body: pdf.toString("base64")
       };
 }
