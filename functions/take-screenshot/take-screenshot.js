@@ -1,9 +1,9 @@
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async (event, context) => {
-    const { 
-        name = 'Chewie'
-     } = JSON.parse(event.body || {});
+    // const { 
+    //     name = 'Chewie'
+    //  } = JSON.parse(event.body || {});
 
      
 
@@ -21,6 +21,8 @@ exports.handler = async (event, context) => {
     
     const page = await browser.newPage();
 
+    const name = 'Chewie'
+
     const HTML = `
     <!DOCTYPE html>
     <html lang="en">
@@ -29,7 +31,7 @@ exports.handler = async (event, context) => {
             <title>Document</title>
         </head>
         <body>
-            <h1>Hello, ${name}</h1>
+            <h1>Hello, ${name}!</h1>
         </body>
     </html>
     `
