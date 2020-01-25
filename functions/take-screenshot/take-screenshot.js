@@ -3,7 +3,9 @@ const chromium = require('chrome-aws-lambda');
 exports.handler = async (event, context) => {
     const { 
         name = 'Chewie'
-     } = JSON.parse(event.body);
+     } = JSON.parse(event.body || {});
+
+     
 
     // if (!pageToScreenshot) return {
     //     statusCode: 400,
