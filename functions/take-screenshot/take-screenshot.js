@@ -54,10 +54,10 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
+        isBase64Encoded: true,
         headers: {
-            'Content-Type': 'application/pdf',
-            'accept-ranges': 'bytes'
+          "Content-type": "application/pdf"
         },
-        body: pdf
-    }
+        body: pdfStream.toString("base64")
+      };
 }
