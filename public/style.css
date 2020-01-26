@@ -15,21 +15,12 @@ main {
     margin: 30px auto;
 }
 
-#result {
-    margin: 20px 0;
-}
-
-img {
-    width: 100%;
-    height: auto;
-}
-
-form {
+section {
     display: flex;
 }
 
 input,
-button {
+a {
     font: inherit;
     line-height: 1;
     padding: 15px 10px;
@@ -42,12 +33,14 @@ input {
     border-bottom-left-radius: 5px;
 }
 
-button {
+a {
     font-size: 14px;
     font-weight: 600;
     background-color: #D33257;
     color: #fff;
     border: 0;
+    width: 50%;
+    text-align: center;
 
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
