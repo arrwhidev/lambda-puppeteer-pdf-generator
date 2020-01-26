@@ -1,6 +1,7 @@
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async (event, ctx) => {
+    console.log(event.queryStringParameters)
     const { queryStringParameters = {} } = event;
     const { name = 'Chewie' } = queryStringParameters;
 
