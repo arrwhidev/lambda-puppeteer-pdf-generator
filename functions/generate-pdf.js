@@ -10,9 +10,25 @@ exports.handler = async (event, ctx) => {
         <head>
             <meta charset="UTF-8">
             <title>Generated PDF</title>
+            <style>
+                body {
+                    line-height: 1.6;
+                    font-size: 15px;
+                    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Oxygen-Sans,Ubuntu,Cantarell,sans-serif;
+                    font-weight: 300;
+                    background-color: #D33257;
+                }
+    
+                h1, p{
+                    color: #fff;
+                }
+    
+            </style>
         </head>
         <body>
             <h1>Hello, ${name}!</h1>
+            <p>This is a dynamically generated PDF, just for you.</p>
+            <img src="https://i.imgur.com/9SPry9r.png"/>
         </body>
     </html>
     `
