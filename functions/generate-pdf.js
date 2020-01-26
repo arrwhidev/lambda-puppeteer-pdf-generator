@@ -12,6 +12,7 @@ exports.handler = async (event, ctx) => {
             <title>Generated PDF</title>
             <style>
                 body {
+                    -webkit-print-color-adjust: exact;
                     line-height: 1.6;
                     font-size: 15px;
                     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Oxygen-Sans,Ubuntu,Cantarell,sans-serif;
@@ -41,7 +42,10 @@ exports.handler = async (event, ctx) => {
     })
     const page = await browser.newPage()
     await page.setContent(HTML)
-    const pdf = await page.pdf({format: 'A4'})
+    const pdf = await page.pdf({
+        format: 'A4',
+        printBackground: true,
+    })
     await browser.close()
   
     return {
