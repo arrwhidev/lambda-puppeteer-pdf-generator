@@ -4,8 +4,19 @@ exports.handler = async (event, ctx) => {
 
     console.log('hello world')
     console.log('----->', event)
-    const { queryStringParameters = {} } = event;
-    const { name = 'Chewie' } = queryStringParameters;
+
+    let name = '';
+
+    if (event.queryStringParameters) {
+        name = 'got_qsp-'
+        if (event.queryStringParameters.name) {
+            name += 'got_name-'
+            name += event.queryStringParameters.name
+        }
+    }
+
+    // const { queryStringParameters = {} } = event;
+    // const { name = 'Chewie' } = queryStringParameters;
 
     const browser = await chromium.puppeteer.launch({
         args: chromium.args,
